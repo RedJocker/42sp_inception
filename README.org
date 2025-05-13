@@ -1,3 +1,7 @@
 *** References
 - [[https://learndocker.online/courses/][docker tutorials]]
 - [[https://docs.docker.com/engine/install/debian/#install-from-a-package][install docker]]
+**** Mariadb
+- [[https://mariadb.com/kb/en/mariadbd-safe/][mariadb-safe]]
+- [[https://wiki.alpinelinux.org/wiki/MariaDB]]
+- [[https://mariadb.com/kb/en/installing-system-tables-mariadb-install-db/]]
