@@ -5,3 +5,5 @@
 - [[https://mariadb.com/kb/en/mariadbd-safe/][mariadb-safe]]
 - [[https://wiki.alpinelinux.org/wiki/MariaDB]]
 - [[https://mariadb.com/kb/en/installing-system-tables-mariadb-install-db/]]
+**** Nginx
+- [[https://www.youtube.com/watch?v=9t9Mp0BGnyI][youtube - NGINX tutorial for Beginners]]
