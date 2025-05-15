@@ -1,4 +1,5 @@
 *** References
+- [[https://cdn.intra.42.fr/pdf/pdf/119221/en.subject.pdf][subject]]
 - [[https://learndocker.online/courses/][docker tutorials]]
 - [[https://docs.docker.com/engine/install/debian/#install-from-a-package][install docker]]
 **** Mariadb
@@ -7,3 +8,6 @@
 - [[https://mariadb.com/kb/en/installing-system-tables-mariadb-install-db/]]
 **** Nginx
 - [[https://www.youtube.com/watch?v=9t9Mp0BGnyI][youtube - NGINX tutorial for Beginners]]
+**** php-fpm + nginx
+- [[https://www.youtube.com/watch?v=1P54UoBjbDs][youtube How to Configure PHP for Nginx with PHP-FPM on Ubuntu]]
+- [[https://www.youtube.com/watch?v=VtKTOZFfoug][youtube Optimizing nginx and PHP-FPM – from Beginner to Expert to Crazy | Arne Blankerts]]
