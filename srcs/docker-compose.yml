@@ -1,13 +1,38 @@
 services:
   mariadb:
-    image: maria-test
+    image: maria-db
     ports:
       - 3306:3306
+    build:
+      context: ./requirements/mariadb/
+    networks:
+      app-net:
+        aliases:
+          - db
   word:
-    image: word-test
+    image: wordpress
     ports:
       - 9000:9000
+    depends_on:
+      - mariadb
+    build:
+      context: ./requirements/wordpress/
+    networks:
+      app-net:
+        aliases:
+          - word
   nginx:
     image: nginx-test
     ports:
       - 8080:8080
+    depends_on:
+      - word
+    build:
+      context: ./requirements/nginx/
+    networks:
+      app-net:
+        aliases:
+          - nginx
+
+networks:
+  app-net:
