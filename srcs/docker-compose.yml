@@ -1,0 +1,13 @@
+services:
+  mariadb:
+    image: maria-test
+    ports:
+      - 3306:3306
+  word:
+    image: word-test
+    ports:
+      - 9000:9000
+  nginx:
+    image: nginx-test
+    ports:
+      - 8080:8080
