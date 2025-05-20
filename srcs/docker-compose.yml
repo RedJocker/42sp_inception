@@ -9,6 +9,9 @@ services:
       app-net:
         aliases:
           - db
+    volumes:
+      - db_data:/var/lib/mysql
+
   word:
     image: wordpress
     ports:
@@ -21,6 +24,7 @@ services:
       app-net:
         aliases:
           - word
+
   nginx:
     image: nginx-test
     ports:
@@ -36,3 +40,7 @@ services:
 
 networks:
   app-net:
+
+volumes:
+  db_data:
+    driver: local
