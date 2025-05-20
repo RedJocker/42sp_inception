@@ -32,7 +32,7 @@ $randomMessages = [
     "Test message " . uniqid()
 ];
 
-$randomMessage = $randomMessages[array_rand($randomMessages)];
+$randomMessage = $randomMessages[array_rand($randomMessages)] . " " . gethostname();
 $conn->query("INSERT INTO test_connection (message) VALUES ('$randomMessage')");
 
 // Display all messages
