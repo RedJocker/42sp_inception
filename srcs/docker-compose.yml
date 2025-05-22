@@ -22,9 +22,11 @@ services:
       app-net:
         aliases:
           - word
+    volumes:
+      - web_files:/var/www/html/
 
   nginx:
-    image: nginx-test
+    image: nginx
     ports:
       - 8080:8080
     depends_on:
@@ -35,6 +37,8 @@ services:
       app-net:
         aliases:
           - nginx
+    volumes:
+      - web_files:/var/www/html/
 
 networks:
   app-net:
@@ -42,3 +46,13 @@ networks:
 volumes:
   db_data:
     driver: local
+    driver_opts:
+      type: none
+      device: /home/maurodri/data/mariadb
+      o: bind
+  web_files:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/maurodri/data/wordpress
+      o: bind

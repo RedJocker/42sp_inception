@@ -1,10 +1,11 @@
 FROM alpine:latest
 RUN apk add mariadb
-RUN mkdir -p /run/mysqld /var/lib/mysql && \
-    chown -R mysql:mysql /run/mysqld /var/lib/mysql
+RUN mkdir -p /run/mysqld && \
+    chown -R mysql:mysql /run/mysqld 
 COPY ./init.sql /docker-entrypoint-initdb.d/init.sql
-COPY ./mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
-RUN ./usr/bin/mariadb-install-db --user=mysql
+COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+COPY ./entrypoint.sh /run/entrypoint.sh
+RUN chmod +x /run/entrypoint.sh
 EXPOSE 3306
-CMD ["mariadbd", "--console"]
+CMD ["/run/entrypoint.sh"]
 
