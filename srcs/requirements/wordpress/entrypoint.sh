@@ -3,6 +3,8 @@
 if ! [ -f index.php ]; then
     echo "WORDPRESS IS NOT YET DOWNLOADED"
     echo "INSTALLING WORDPRESS"
+    chown -R root:root /var/www/html
+    chmod -R 777 /var/www/html
     tar -xzv --strip-components=1 -f /tmp/wordpress.tar.gz -C /var/www/html/ > /dev/null
 else
    echo "WORDPRESS IS ALREADY DOWNLOADED"
@@ -28,6 +30,11 @@ if ! [ -f wp-config.php ]; then
 else
    echo "WORDPRESS IS ALREADY CONFIGURED"
 fi
+
+while ! check_mariadb ; do
+	echo "MariaDB is not available yet. Waiting..."
+	sleep 1
+done
 
 if ! wp core is-installed --allow-root;
 then

@@ -1,6 +1,6 @@
 FROM alpine:latest
 WORKDIR /var/www/html/
-RUN apk add php84-fpm php84-mysqli php84 php84-phar php84-mbstring
+RUN apk add php84-fpm php84-mysqli php84 php84-phar php84-mbstring php84-pdo php84-pdo_mysql
 ADD https://wordpress.org/latest.tar.gz /tmp/wordpress.tar.gz
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /bin/wp
 EXPOSE 9000
