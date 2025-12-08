@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: maria-db
+    image: mariadb
     ports:
       - 3306:3306
     build:
@@ -12,7 +12,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  word:
+  wordpress:
     image: wordpress
     depends_on:
       - mariadb
@@ -30,7 +30,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - word
+      - wordpress
     build:
       context: ./requirements/nginx/
     networks:

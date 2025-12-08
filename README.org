@@ -11,3 +11,23 @@
 **** php-fpm + nginx
 - [[https://www.youtube.com/watch?v=1P54UoBjbDs][youtube How to Configure PHP for Nginx with PHP-FPM on Ubuntu]]
 - [[https://www.youtube.com/watch?v=VtKTOZFfoug][youtube Optimizing nginx and PHP-FPM – from Beginner to Expert to Crazy | Arne Blankerts]]
+
+
+
+*** Requirements
+- [X] Each Docker image must have the same name as its corresponding service
+- [X] Each service has to run in a dedicated container
+- [X] You also have to write your own Dockerfiles, one per service.
+- [ ] The Dockerfiles must be called in your docker-compose.yml by your Makefile.
+- [ ] A container that contains NGINX with TLSv1.2 or TLSv1.3 only
+- [ ] A container that contains WordPress + php-fpm only, without nginx
+  - [ ] wordpress must be installed and configured
+  - [ ] A volume that contains your wordpress files
+- [ ] A Docker container that contains MariaDB only, without nginx.
+  - [ ] A volume that contains your database data
+- [ ] Your volumes will be available in the
+      /home/login/data folder of the host machine using Docker
+- [ ] A docker-network that establishes the connection between your containers
+- [ ] Your containers have to restart in case of a crash.
+- [ ] configure your domain name so it points to your local IP address.
+      This domain name must be login.42.fr

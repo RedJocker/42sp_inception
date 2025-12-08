@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.23.0
 RUN apk add mariadb
 RUN mkdir -p /run/mysqld && \
     chown -R mysql:mysql /run/mysqld 
