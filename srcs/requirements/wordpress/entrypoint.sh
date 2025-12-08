@@ -40,7 +40,7 @@ if ! wp core is-installed --allow-root;
 then
     echo "WORDPRESS IS NOT YET INSTALLED"
     wp core install \
-    	--url="localhost:8080" \
+    	--url="https://maurodri.42.fr" \
     	--title="$inception" \
     	--admin_user="maurodri" \
     	--admin_password="1234" \

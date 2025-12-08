@@ -40,3 +40,4 @@
   - [ ] extract variables to .env
   - [ ] extract sensitive content to docker secrets
 - [ ] implements ssl
+- [ ] replace latest tags

@@ -4,26 +4,26 @@ services:
     ports:
       - ${MARIADB_HOST_PORT}:${MARIADB_CONTAINER_PORT}
     build:
-      context: ./requirements/mariadb/
+      context: ./requirements/mariadb
     networks:
       app-net:
         aliases:
           - db
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:${CONTAINER_DB_DATA_FOLDER}
 
   wordpress:
     image: wordpress
     depends_on:
       - mariadb
     build:
-      context: ./requirements/wordpress/
+      context: ./requirements/wordpress
     networks:
       app-net:
         aliases:
           - word
     volumes:
-      - web_files:/var/www/html/
+      - web_files:${CONTAINER_WEB_FOLDER}
 
   nginx:
     image: nginx
@@ -32,14 +32,18 @@ services:
     depends_on:
       - wordpress
     build:
-      context: ./requirements/nginx/
+      context: ./requirements/nginx
     networks:
       app-net:
         aliases:
           - nginx
-    volumes:
-      - web_files:/var/www/html/
+    environment:
+      - SSL_CERT_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_FILE}
+      - SSL_CERT_KEY_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_KEY_FILE}
 
+    volumes:
+      - web_files:${CONTAINER_WEB_FOLDER}
+      - ssl_certs:${CONTAINER_SSL_CERTS_FOLDER}
 networks:
   app-net:
 
@@ -55,4 +59,10 @@ volumes:
     driver_opts:
       type: none
       device: ${HOST_WEB_FOLDER}
+      o: bind
+  ssl_certs:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOST_SSL_CERTS_FOLDER}
       o: bind
