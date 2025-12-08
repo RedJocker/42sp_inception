@@ -31,3 +31,12 @@
 - [ ] Your containers have to restart in case of a crash.
 - [ ] configure your domain name so it points to your local IP address.
       This domain name must be login.42.fr
+
+
+*** Tasks
+
+- [ ] implement health checks
+- [ ] extract variables
+  - [ ] extract variables to .env
+  - [ ] extract sensitive content to docker secrets
+- [ ] implements ssl

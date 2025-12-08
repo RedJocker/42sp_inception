@@ -2,7 +2,7 @@ services:
   mariadb:
     image: mariadb
     ports:
-      - 3306:3306
+      - ${MARIADB_HOST_PORT}:${MARIADB_CONTAINER_PORT}
     build:
       context: ./requirements/mariadb/
     networks:
@@ -28,7 +28,7 @@ services:
   nginx:
     image: nginx
     ports:
-      - 8080:8080
+      - ${NGINX_HOST_PORT}:${NGINX_CONTAINER_PORT}
     depends_on:
       - wordpress
     build:
@@ -48,11 +48,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/maurodri/data/mariadb
+      device: ${HOST_DB_DATA_FOLDER}
       o: bind
   web_files:
     driver: local
     driver_opts:
       type: none
-      device: /home/maurodri/data/wordpress
+      device: ${HOST_WEB_FOLDER}
       o: bind
