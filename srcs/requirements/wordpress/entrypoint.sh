@@ -1,5 +1,10 @@
 #!/bin/sh
 
+envsubst '${WORDPRESS_PORT}'  \
+    < /etc/php84/php-fpm.d/www.conf.template \
+    > /etc/php84/php-fpm.d/www.conf
+
+
 if ! [ -f index.php ]; then
     echo "WORDPRESS IS NOT YET DOWNLOADED"
     echo "INSTALLING WORDPRESS"

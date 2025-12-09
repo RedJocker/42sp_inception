@@ -8,7 +8,7 @@ log_level = notice
 
 user = nobody
 group = nobody
-listen = 9000
+listen = ${WORDPRESS_PORT}
 pm = dynamic
 pm.max_children = 5
 pm.start_servers = 2

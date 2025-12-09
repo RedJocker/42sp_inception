@@ -15,13 +15,12 @@ error_log /dev/stderr info;
 http {
 
 	server {
-		listen 443 ssl;
-		# listen 8080;
+		listen ${NGINX_CONTAINER_PORT} ssl;
 		server_name maurodri.42.fr;
 
 
-		ssl_certificate      /etc/ssl/maurodri.crt;
-		ssl_certificate_key  /etc/ssl/maurodri.key;
+		ssl_certificate      ${SSL_CERT_PATH};
+		ssl_certificate_key  ${SSL_CERT_KEY_PATH};
 
 		ssl_protocols TLSv1.3;
 
@@ -35,7 +34,7 @@ http {
 		location ~ \.php$ {
 
 	            	include fastcgi_params;
-		    	fastcgi_pass word:9000;
+		    	fastcgi_pass word:${WORDPRESS_PORT};
 		    	fastcgi_index index.php;
 			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		}

@@ -18,6 +18,8 @@ services:
       - mariadb
     build:
       context: ./requirements/wordpress
+    environment:
+      - WORDPRESS_PORT=${WORDPRESS_PORT}
     networks:
       app-net:
         aliases:
@@ -40,7 +42,8 @@ services:
     environment:
       - SSL_CERT_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_FILE}
       - SSL_CERT_KEY_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_KEY_FILE}
-
+      - WORDPRESS_PORT=${WORDPRESS_PORT}
+      - NGINX_CONTAINER_PORT=${NGINX_CONTAINER_PORT}
     volumes:
       - web_files:${CONTAINER_WEB_FOLDER}
       - ssl_certs:${CONTAINER_SSL_CERTS_FOLDER}
