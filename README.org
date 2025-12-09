@@ -11,7 +11,8 @@
 **** php-fpm + nginx
 - [[https://www.youtube.com/watch?v=1P54UoBjbDs][youtube How to Configure PHP for Nginx with PHP-FPM on Ubuntu]]
 - [[https://www.youtube.com/watch?v=VtKTOZFfoug][youtube Optimizing nginx and PHP-FPM – from Beginner to Expert to Crazy | Arne Blankerts]]
-
+**** ssl
+- [[https://letsencrypt.org/docs/certificates-for-localhost/][ssl certificates]]
 
 
 *** Requirements
@@ -19,25 +20,32 @@
 - [X] Each service has to run in a dedicated container
 - [X] You also have to write your own Dockerfiles, one per service.
 - [ ] The Dockerfiles must be called in your docker-compose.yml by your Makefile.
-- [ ] A container that contains NGINX with TLSv1.2 or TLSv1.3 only
-- [ ] A container that contains WordPress + php-fpm only, without nginx
-  - [ ] wordpress must be installed and configured
-  - [ ] A volume that contains your wordpress files
-- [ ] A Docker container that contains MariaDB only, without nginx.
-  - [ ] A volume that contains your database data
-- [ ] Your volumes will be available in the
+- [X] A container that contains NGINX with TLSv1.2 or TLSv1.3 only
+- [X] A container that contains WordPress + php-fpm only, without nginx
+  - [X] wordpress must be installed and configured
+  - [X] A volume that contains your wordpress files
+- [X] A Docker container that contains MariaDB only, without nginx.
+  - [X] A volume that contains your database data
+- [X] Your volumes will be available in the
       /home/login/data folder of the host machine using Docker
-- [ ] A docker-network that establishes the connection between your containers
+- [X] A docker-network that establishes the connection between your containers
 - [ ] Your containers have to restart in case of a crash.
-- [ ] configure your domain name so it points to your local IP address.
+- [X] configure your domain name so it points to your local IP address.
       This domain name must be login.42.fr
-
+- [ ] Wordpress database must have two users with one administrator
+- [ ] Nginx must be the only entrypoint to services via 443 using TLSv1.[23]
+- Forbiden
+  - [ ] using latest tag on containers
+  - [ ] exponsing sensitive data(passwords, credenntials, keys)
+  - [ ] not using .env
 
 *** Tasks
 
 - [ ] implement health checks
 - [ ] extract variables
   - [ ] extract variables to .env
+    - [X] extract variables from docker-compose.yml
+    - [ ] use envsubst to replace varibles from other .conf files
   - [ ] extract sensitive content to docker secrets
-- [ ] implements ssl
+- [X] implements ssl
 - [ ] replace latest tags
