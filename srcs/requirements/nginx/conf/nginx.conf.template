@@ -16,7 +16,7 @@ http {
 
 	server {
 		listen ${NGINX_CONTAINER_PORT} ssl;
-		server_name maurodri.42.fr;
+		server_name ${INCEPTION_SERVER_NAME};
 
 
 		ssl_certificate      ${SSL_CERT_PATH};

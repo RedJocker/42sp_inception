@@ -1,6 +1,6 @@
 #!/bin/sh
 
-envsubst '${WORDPRESS_PORT:=9000}'  \
+envsubst '${WORDPRESS_PORT}'  \
     < /etc/php84/php-fpm.d/www.conf.template \
     > /etc/php84/php-fpm.d/www.conf
 
@@ -45,7 +45,7 @@ if ! wp core is-installed --allow-root;
 then
     echo "WORDPRESS IS NOT YET INSTALLED"
     wp core install \
-    	--url="https://maurodri.42.fr" \
+    	--url="https://${INCEPTION_SERVER_NAME}" \
     	--title="${WORDPRESS_TITLE:=Inception}" \
     	--admin_user="maurodri" \
     	--admin_password="1234" \
