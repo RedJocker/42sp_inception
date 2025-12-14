@@ -5,6 +5,8 @@ services:
       - ${MARIADB_HOST_PORT}:${MARIADB_CONTAINER_PORT}
     build:
       context: ./requirements/mariadb
+    environment:
+      - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
     networks:
       app-net:
         aliases:
@@ -20,6 +22,8 @@ services:
       context: ./requirements/wordpress
     environment:
       - WORDPRESS_PORT=${WORDPRESS_PORT}
+      - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
+      - WORDPRESS_TITLE=${WORDPRESS_TITLE}
     networks:
       app-net:
         aliases:

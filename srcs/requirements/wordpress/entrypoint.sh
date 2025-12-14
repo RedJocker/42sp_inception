@@ -1,6 +1,6 @@
 #!/bin/sh
 
-envsubst '${WORDPRESS_PORT}'  \
+envsubst '${WORDPRESS_PORT:=9000}'  \
     < /etc/php84/php-fpm.d/www.conf.template \
     > /etc/php84/php-fpm.d/www.conf
 
@@ -16,7 +16,7 @@ else
 fi
 
 check_mariadb() {
-    nc -z db 3306
+    nc -z db "${MARIADB_PORT:=3306}"
 }
 
 if ! [ -f wp-config.php ]; then
@@ -46,7 +46,7 @@ then
     echo "WORDPRESS IS NOT YET INSTALLED"
     wp core install \
     	--url="https://maurodri.42.fr" \
-    	--title="$inception" \
+    	--title="${WORDPRESS_TITLE:=Inception}" \
     	--admin_user="maurodri" \
     	--admin_password="1234" \
     	--admin_email="maurodri@42.fr" \

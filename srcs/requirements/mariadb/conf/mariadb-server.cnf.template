@@ -12,7 +12,7 @@ pid-file                = /run/mysqld/mysqld.pid
 basedir                 = /usr
 datadir                 = /var/lib/mysql
 tmpdir                  = /tmp
-port                    = 3306
+port                    = ${MARIADB_PORT}
 init-file		= /docker-entrypoint-initdb.d/init.sql
 
 # Broken reverse DNS slows down connections considerably and name resolve is
