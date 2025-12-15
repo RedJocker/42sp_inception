@@ -26,7 +26,7 @@ if ! [ -f wp-config.php ]; then
 	sleep 1
     done
     echo "CONFIGURING WORDPRESS"
-    wp config create --dbname=my_db \
+    wp config create --dbname=${WORDPRESS_DATABASE_NAME} \
        --dbuser=root \
        --dbhost=db \
        --dbpass=1234 \
