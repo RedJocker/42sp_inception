@@ -31,6 +31,8 @@ services:
       - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
       - MARIADB_NETWORK_ALIAS=${MARIADB_NETWORK_ALIAS}
       - MARIADB_USER=${MARIADB_USER}
+      - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
     networks:
       app-net:
         aliases:
@@ -39,6 +41,7 @@ services:
       - web_files:${CONTAINER_WEB_FOLDER}
     secrets:
       - mariadb_pass
+      - wordpress_admin_pass
 
   nginx:
     image: nginx
@@ -51,7 +54,7 @@ services:
     networks:
       app-net:
         aliases:
-          - nginx
+          - ${NGINX_NETWORK_ALIAS}
     environment:
       - SSL_CERT_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_FILE}
       - SSL_CERT_KEY_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_KEY_FILE}
@@ -89,3 +92,5 @@ volumes:
 secrets:
   mariadb_pass:
     file: ../secrets/mariadb_pass
+  wordpress_admin_pass:
+    file: ../secrets/wordpress_admin_pass

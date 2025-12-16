@@ -4,8 +4,7 @@ envsubst '${WORDPRESS_PORT}'  \
     < /etc/php84/php-fpm.d/www.conf.template \
     > /etc/php84/php-fpm.d/www.conf
 
-MARIADB_USER_PASS=$(cat /run/secrets/mariadb_pass)
-echo "MARIADB_USER_PASS=${MARIADB_USER_PASS}"
+
 
 if ! [ -f index.php ]; then
     echo "WORDPRESS IS NOT YET DOWNLOADED"
@@ -21,6 +20,8 @@ check_mariadb() {
     # TODO MAKE PROPER HEALTHCHECK
     nc -z "$MARIADB_NETWORK_ALIAS" "${MARIADB_PORT:=3306}"
 }
+
+MARIADB_USER_PASS=$(cat /run/secrets/mariadb_pass)
 
 if ! [ -f wp-config.php ]; then
     echo "WORDPRESS IS NOT YET CONFIGURED"
@@ -44,15 +45,17 @@ while ! check_mariadb ; do
 	sleep 1
 done
 
+WORDPRESS_ADMIN_PASS=$(cat /run/secrets/wordpress_admin_pass)
+
 if ! wp core is-installed --allow-root;
 then
     echo "WORDPRESS IS NOT YET INSTALLED"
     wp core install \
     	--url="https://${INCEPTION_SERVER_NAME}" \
     	--title="${WORDPRESS_TITLE:=Inception}" \
-    	--admin_user="maurodri" \
-    	--admin_password="1234" \
-    	--admin_email="maurodri@42.fr" \
+    	--admin_user="${WORDPRESS_ADMIN}" \
+    	--admin_password="${WORDPRESS_ADMIN_PASS}" \
+    	--admin_email="${WORDPRESS_ADMIN_EMAIL}" \
     	--skip-email \
     	--allow-root;
 else
