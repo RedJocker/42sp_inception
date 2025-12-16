@@ -7,12 +7,15 @@ services:
       context: ./requirements/mariadb
     environment:
       - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
+      - MARIADB_USER=${MARIADB_USER}
     networks:
       app-net:
         aliases:
-          - db
+          - ${MARIADB_NETWORK_ALIAS}
     volumes:
       - db_data:${CONTAINER_DB_DATA_FOLDER}
+    secrets:
+      - mariadb_pass
 
   wordpress:
     image: wordpress
@@ -22,16 +25,20 @@ services:
       context: ./requirements/wordpress
     environment:
       - WORDPRESS_PORT=${WORDPRESS_PORT}
-      - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
       - WORDPRESS_TITLE=${WORDPRESS_TITLE}
       - INCEPTION_SERVER_NAME=${INCEPTION_SERVER_NAME}
       - WORDPRESS_DATABASE_NAME=${WORDPRESS_DATABASE_NAME}
+      - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
+      - MARIADB_NETWORK_ALIAS=${MARIADB_NETWORK_ALIAS}
+      - MARIADB_USER=${MARIADB_USER}
     networks:
       app-net:
         aliases:
           - word
     volumes:
       - web_files:${CONTAINER_WEB_FOLDER}
+    secrets:
+      - mariadb_pass
 
   nginx:
     image: nginx
@@ -54,6 +61,7 @@ services:
     volumes:
       - web_files:${CONTAINER_WEB_FOLDER}
       - ssl_certs:${CONTAINER_SSL_CERTS_FOLDER}
+
 networks:
   app-net:
 
@@ -76,3 +84,7 @@ volumes:
       type: none
       device: ${HOST_SSL_CERTS_FOLDER}
       o: bind
+
+secrets:
+  mariadb_pass:
+    file: ../secrets/mariadb_pass

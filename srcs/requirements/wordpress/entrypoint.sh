@@ -4,6 +4,8 @@ envsubst '${WORDPRESS_PORT}'  \
     < /etc/php84/php-fpm.d/www.conf.template \
     > /etc/php84/php-fpm.d/www.conf
 
+MARIADB_USER_PASS=$(cat /run/secrets/mariadb_pass)
+echo "MARIADB_USER_PASS=${MARIADB_USER_PASS}"
 
 if ! [ -f index.php ]; then
     echo "WORDPRESS IS NOT YET DOWNLOADED"
@@ -16,7 +18,8 @@ else
 fi
 
 check_mariadb() {
-    nc -z db "${MARIADB_PORT:=3306}"
+    # TODO MAKE PROPER HEALTHCHECK
+    nc -z "$MARIADB_NETWORK_ALIAS" "${MARIADB_PORT:=3306}"
 }
 
 if ! [ -f wp-config.php ]; then
@@ -26,10 +29,10 @@ if ! [ -f wp-config.php ]; then
 	sleep 1
     done
     echo "CONFIGURING WORDPRESS"
-    wp config create --dbname=${WORDPRESS_DATABASE_NAME} \
-       --dbuser=root \
-       --dbhost=db \
-       --dbpass=1234 \
+    wp config create --dbname="$WORDPRESS_DATABASE_NAME" \
+       --dbuser="$MARIADB_USER" \
+       --dbhost="$MARIADB_NETWORK_ALIAS" \
+       --dbpass="$MARIADB_USER_PASS" \
        --dbprefix="wp_" \
        --allow-root
 else
