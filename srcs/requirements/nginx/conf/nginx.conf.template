@@ -34,7 +34,7 @@ http {
 		location ~ \.php$ {
 
 	            	include fastcgi_params;
-		    	fastcgi_pass word:${WORDPRESS_PORT};
+		    	fastcgi_pass ${WORDPRESS_NETWORK_ALIAS}:${WORDPRESS_PORT};
 		    	fastcgi_index index.php;
 			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 		}

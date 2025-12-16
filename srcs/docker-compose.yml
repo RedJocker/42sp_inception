@@ -34,7 +34,7 @@ services:
     networks:
       app-net:
         aliases:
-          - word
+          - ${WORDPRESS_NETWORK_ALIAS}
     volumes:
       - web_files:${CONTAINER_WEB_FOLDER}
     secrets:
@@ -56,6 +56,7 @@ services:
       - SSL_CERT_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_FILE}
       - SSL_CERT_KEY_PATH=${CONTAINER_SSL_CERTS_FOLDER}/${SSL_CERT_KEY_FILE}
       - WORDPRESS_PORT=${WORDPRESS_PORT}
+      - WORDPRESS_NETWORK_ALIAS=${WORDPRESS_NETWORK_ALIAS}
       - NGINX_CONTAINER_PORT=${NGINX_CONTAINER_PORT}
       - INCEPTION_SERVER_NAME=${INCEPTION_SERVER_NAME}
     volumes:
