@@ -8,6 +8,7 @@ services:
     environment:
       - MARIADB_PORT=${MARIADB_CONTAINER_PORT}
       - MARIADB_USER=${MARIADB_USER}
+      - WORDPRESS_DATABASE_NAME=${WORDPRESS_DATABASE_NAME}
     networks:
       app-net:
         aliases:
@@ -16,6 +17,7 @@ services:
       - db_data:${CONTAINER_DB_DATA_FOLDER}
     secrets:
       - mariadb_pass
+      - mariadb_root_pass
 
   wordpress:
     image: wordpress
@@ -92,5 +94,7 @@ volumes:
 secrets:
   mariadb_pass:
     file: ../secrets/mariadb_pass
+  mariadb_root_pass:
+    file: ../secrets/mariadb_root_pass
   wordpress_admin_pass:
     file: ../secrets/wordpress_admin_pass
