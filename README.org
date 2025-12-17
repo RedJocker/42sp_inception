@@ -32,20 +32,22 @@
 - [ ] Your containers have to restart in case of a crash.
 - [X] configure your domain name so it points to your local IP address.
       This domain name must be login.42.fr
-- [ ] Wordpress database must have two users with one administrator
-- [ ] Nginx must be the only entrypoint to services via 443 using TLSv1.[23]
+- [X] Wordpress database must have two users with one administrator
+- [X] Nginx must be the only entrypoint to services via 443 using TLSv1.[23]
 - Forbiden
-  - [ ] using latest tag on containers
-  - [ ] exponsing sensitive data(passwords, credenntials, keys)
-  - [ ] not using .env
+  - [X] using latest tag on containers
+  - [X] exponsing sensitive data(passwords, credenntials, keys)
+  - [X] not using .env
 
 *** Tasks
 
 - [ ] implement health checks
-- [ ] extract variables
-  - [ ] extract variables to .env
+- [X] extract variables
+  - [X] extract variables to .env
     - [X] extract variables from docker-compose.yml
-    - [ ] use envsubst to replace varibles from other .conf files
-  - [ ] extract sensitive content to docker secrets
+    - [X] use envsubst to replace varibles from other .conf files
+  - [X] extract sensitive content to docker secrets
 - [X] implements ssl
-- [ ] replace latest tags
+- [X] replace latest tags
+- [ ] create required documentation files
+- [ ] create Makefile rules to set up project and run services

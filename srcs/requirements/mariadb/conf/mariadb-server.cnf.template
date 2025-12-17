@@ -13,6 +13,8 @@ basedir                 = /usr
 datadir                 = /var/lib/mysql
 tmpdir                  = /tmp
 port                    = ${MARIADB_PORT}
+
+# this runs our custom database init when running mariadb-install-db
 init-file		= /docker-entrypoint-initdb.d/init.sql
 
 # Broken reverse DNS slows down connections considerably and name resolve is
