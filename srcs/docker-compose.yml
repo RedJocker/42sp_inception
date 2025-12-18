@@ -24,6 +24,7 @@ services:
       timeout: 20s
       retries: 5
       start_period: 2s
+    restart: unless-stopped
 
   wordpress:
     image: wordpress
@@ -58,6 +59,7 @@ services:
       timeout: 20s
       retries: 5
       start_period: 2s
+    restart: unless-stopped
 
   nginx:
     image: nginx
@@ -88,6 +90,7 @@ services:
       timeout: 20s
       retries: 5
       start_period: 2s
+    restart: unless-stopped
 
 networks:
   app-net:
