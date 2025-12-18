@@ -5,6 +5,6 @@ ADD https://wordpress.org/latest.tar.gz /tmp/wordpress.tar.gz
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /bin/wp
 COPY ./conf/www.conf.template /etc/php84/php-fpm.d/www.conf.template
 COPY ./entrypoint.sh /run/entrypoint.sh
-RUN chmod +x /run/entrypoint.sh
-RUN chmod +x /bin/wp
+COPY ./healthcheck.sh /run/healthcheck.sh
+RUN chmod +x /run/entrypoint.sh /bin/wp /run/healthcheck.sh
 CMD ["/run/entrypoint.sh"]

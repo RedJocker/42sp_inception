@@ -18,11 +18,19 @@ services:
     secrets:
       - mariadb_pass
       - mariadb_root_pass
+    healthcheck:
+      test: ["CMD", "/run/healthcheck.sh"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+      start_period: 2s
 
   wordpress:
     image: wordpress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
+
     build:
       context: ./requirements/wordpress
     environment:
@@ -44,13 +52,20 @@ services:
     secrets:
       - mariadb_pass
       - wordpress_admin_pass
+    healthcheck:
+      test: ["CMD", "/run/healthcheck.sh"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+      start_period: 2s
 
   nginx:
     image: nginx
     ports:
       - ${NGINX_HOST_PORT}:${NGINX_CONTAINER_PORT}
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     build:
       context: ./requirements/nginx
     networks:
@@ -67,6 +82,12 @@ services:
     volumes:
       - web_files:${CONTAINER_WEB_FOLDER}
       - ssl_certs:${CONTAINER_SSL_CERTS_FOLDER}
+    healthcheck:
+      test: ["CMD", "/runner/healthcheck.sh"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+      start_period: 2s
 
 networks:
   app-net:
