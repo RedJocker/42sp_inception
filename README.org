@@ -20,7 +20,7 @@
 - [X] Each Docker image must have the same name as its corresponding service
 - [X] Each service has to run in a dedicated container
 - [X] You also have to write your own Dockerfiles, one per service.
-- [ ] The Dockerfiles must be called in your docker-compose.yml by your Makefile.
+- [X] The Dockerfiles must be called in your docker-compose.yml by your Makefile.
 - [X] A container that contains NGINX with TLSv1.2 or TLSv1.3 only
 - [X] A container that contains WordPress + php-fpm only, without nginx
   - [X] wordpress must be installed and configured
@@ -51,4 +51,4 @@
 - [X] implements ssl
 - [X] replace latest tags
 - [ ] create required documentation files
-- [ ] create Makefile rules to set up project and run services
+- [X] create Makefile rules to set up project and run services
