@@ -1,9 +1,12 @@
 #!/bin/sh
 
+
+# THIS FILE ASSUMES docker compose is successful in ensuring mariadb is up
+# and running at this point
+
 envsubst '${WORDPRESS_PORT}'  \
     < /etc/php84/php-fpm.d/www.conf.template \
     > /etc/php84/php-fpm.d/www.conf
-
 
 
 if ! [ -f index.php ]; then
@@ -16,19 +19,10 @@ else
    echo "WORDPRESS IS ALREADY DOWNLOADED"
 fi
 
-check_mariadb() {
-    # TODO MAKE PROPER HEALTHCHECK
-    nc -z "$MARIADB_NETWORK_ALIAS" "${MARIADB_PORT:=3306}"
-}
-
 MARIADB_USER_PASS=$(cat /run/secrets/mariadb_pass)
 
 if ! [ -f wp-config.php ]; then
     echo "WORDPRESS IS NOT YET CONFIGURED"
-    while ! check_mariadb ; do
-	echo "MariaDB is not available yet. Waiting..."
-	sleep 1
-    done
     echo "CONFIGURING WORDPRESS"
     wp config create --dbname="$WORDPRESS_DATABASE_NAME" \
        --dbuser="$MARIADB_USER" \
@@ -39,11 +33,6 @@ if ! [ -f wp-config.php ]; then
 else
    echo "WORDPRESS IS ALREADY CONFIGURED"
 fi
-
-while ! check_mariadb ; do
-	echo "MariaDB is not available yet. Waiting..."
-	sleep 1
-done
 
 WORDPRESS_ADMIN_PASS=$(cat /run/secrets/wordpress_admin_pass)
 

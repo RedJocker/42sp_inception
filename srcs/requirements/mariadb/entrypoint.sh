@@ -14,11 +14,6 @@ envsubst '${WORDPRESS_DATABASE_NAME} \
     < /docker-entrypoint-initdb.d/init.sql.template \
     > /docker-entrypoint-initdb.d/init.sql
 
-echo "WORDPRESS_DATABASE_NAME $WORDPRESS_DATABASE_NAME"
-echo "MARIADB_USER_PASS $MARIADB_USER_PASS"
-echo "MARIADB_USER $MARIADB_USER"
-echo "MARIADB_PORT $MARIADB_PORT"
-cat /docker-entrypoint-initdb.d/init.sql
 
 /usr/bin/mariadb-install-db \
     --defaults-file=/etc/my.cnf.d/mariadb-server.cnf

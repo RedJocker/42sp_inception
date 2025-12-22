@@ -50,7 +50,7 @@
   - [X] extract sensitive content to docker secrets
 - [X] implements ssl
 - [X] replace latest tags
-- [ ] create required documentation files
+- [X] create required documentation files
   - [X] create README.md
   - [X] create USER_DOC.md
   - [X] create DEV_DOC.md

@@ -47,3 +47,12 @@ down:
 
 stop:
 	$(DOCKER_COMPOSE) stop
+
+clean:
+	-sudo rm -rf $(HOST_DB_DATA_FOLDER);
+	-sudo rm -rf $(HOST_WEB_FOLDER);
+	-sudo rm -rf $(HOST_SSL_CERTS_FOLDER);
+
+re: clean all
+
+.PHONY: all setup_secrets generate_certificates setup_data_directories up down stop clean re
