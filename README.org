@@ -51,4 +51,9 @@
 - [X] implements ssl
 - [X] replace latest tags
 - [ ] create required documentation files
-- [X] create Makefile rules to set up project and run services
+  - [X] create README.md
+  - [ ] create USER_DOC.md
+  - [ ] create DEV_DOC.md
+- [-] create Makefile rules to set up project and run services
+  - [ ] create a make re rule that cleans an existing setup,
+        creates a new setup and executes the service cluster 
