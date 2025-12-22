@@ -141,7 +141,9 @@ my situation and objectives to AI. As AI chats happens in sessions one same
 session could have several alternations between explanations, goal settings and
 error message copy and pasting.
 Still here the traditional search for error messages method was also used 
-leading often to some stackoverflow (or similar) mention on results.
+leading often to some stackoverflow (or similar) mention on results although it
+is also common nowdays to have ai generated content on privigeled position as
+part of search result.
 
 
 
