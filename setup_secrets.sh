@@ -31,14 +31,14 @@ if ! [ -d "$SECRETS_FOLDER" ]; then
     mkdir ./"$SECRETS_FOLDER"
 fi
 
-if ! [ -f "$SECRETS_FOLDER"/mariadb_pass ]; then
+if ! [ -s "$SECRETS_FOLDER"/mariadb_pass ]; then
     password=""
     read_secret "Input password for mariadb user"
     echo -n "$password" > "$SECRETS_FOLDER"/mariadb_pass
     unset password
 fi
 
-if ! [ -f "$SECRETS_FOLDER"/mariadb_root_pass ]; then
+if ! [ -s "$SECRETS_FOLDER"/mariadb_root_pass ]; then
     password=""
     read_secret "Input password for mariadb root"
     echo -n "$password" > "$SECRETS_FOLDER"/mariadb_root_pass
@@ -46,7 +46,7 @@ if ! [ -f "$SECRETS_FOLDER"/mariadb_root_pass ]; then
 fi
 
 
-if ! [ -f "$SECRETS_FOLDER"/wordpress_admin_pass ]; then
+if ! [ -s "$SECRETS_FOLDER"/wordpress_admin_pass ]; then
     password=""
     read_secret "Input password for wordpress admin"
     echo -n "$password" > "$SECRETS_FOLDER"/wordpress_admin_pass

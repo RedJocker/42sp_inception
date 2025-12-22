@@ -1,9 +1,8 @@
-/* TODO
-Developer documentation This file must describe how a devel-
-oper can:
-◦ Set up the environment from scratch (prerequisites, configuration files, se-
-crets).
-◦ Build and launch the project using the Makefile and Docker Compose.
-◦ Use relevant commands to manage the containers and volumes.
-◦ Identify where the project data is stored and how it persists.
-*/
+All developer required information is already available at either
+[./README.md](./README.md) or [`./USER_DOC.md`](./USER_DOC.md).
+
+Please refer to those files to retrieve the information you need.
+If you still miss some information open an issue and I will try 
+to answer it. 
+Please bear in mind that the goal of this project is educational, 
+so keep low expectations.

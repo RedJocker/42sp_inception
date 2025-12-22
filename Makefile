@@ -27,8 +27,8 @@ setup_secrets:
 	bash ./setup_secrets.sh
 
 generate_certificates:
-	@ls ~/data/ssl $(QUIET) || mkdir -p ~/data/ssl
-	@ls ~/data/ssl/maurodri.crt $(QUIET) \
+	@ls $(HOST_SSL_CERTS_FOLDER) $(QUIET) || mkdir -p $(HOST_SSL_CERTS_FOLDER)
+	@ls $(HOST_SSL_CERTS_FOLDER)/$(SSL_CERT_KEY_FILE) $(QUIET) \
         || openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 		-keyout $(HOST_SSL_CERTS_FOLDER)/$(SSL_CERT_KEY_FILE) \
 		-out $(HOST_SSL_CERTS_FOLDER)/$(SSL_CERT_FILE) \
